@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ShopEase - Shop fashion, electronics and home essentials.">
+  <title>ShopEase | Online Shopping</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="/script.js" defer></script>
+</head>
+<body>
+  <div class="announcement">
+    Free shipping on orders above ₹999
+  </div>
+
+  <header class="header">
+    <a href="#" class="logo">Shop<span>Ease.</span></a>
+
+    <form class="search-box" id="searchForm">
+      <input
+        type="search"
+        id="searchInput"
+        placeholder="Search products..."
+        aria-label="Search products"
+      >
+      <button type="submit" aria-label="Search">⌕</button>
+    </form>
+
+    <button class="cart-button" id="openCart" aria-label="Open cart">
+      🛒 Cart <span id="cartCount">0</span>
+    </button>
+  </header>
+
+  <nav class="navbar">
+    <a href="#home">Home</a>
+    <a href="#products">Shop</a>
+    <a href="#products" data-nav-category="Fashion">Fashion</a>
+    <a href="#products" data-nav-category="Electronics">Electronics</a>
+    <a href="#products" data-nav-category="Home">Home Essentials</a>
+  </nav>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <p class="eyebrow">YOUR EVERYDAY SHOPPING DESTINATION</p>
+        <h1>Find your next<br>favorite thing.</h1>
+        <p class="hero-description">
+          Discover great finds for your style, your home,
+          and everything in between.
+        </p>
+        <a href="#products" class="primary-button">Explore Products →</a>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="hero-circle"></div>
+        <div class="hero-bag">🛍️</div>
+        <div class="floating-tag tag-one">New arrivals ✨</div>
+        <div class="floating-tag tag-two">Great finds!</div>
+      </div>
+    </section>
+
+    <section class="benefits">
+      <div>🚚 <span><strong>Easy Delivery</strong><small>Convenient shopping</small></span></div>
+      <div>🔒 <span><strong>Secure Demo</strong><small>Safe browsing</small></span></div>
+      <div>↩️ <span><strong>Easy Returns</strong><small>Demo store policy</small></span></div>
+      <div>💬 <span><strong>Customer Care</strong><small>We're here to help</small></span></div>
+    </section>
+
+    <section class="products-section" id="products">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">MADE FOR YOUR EVERYDAY</p>
+          <h2>Explore our collection</h2>
+          <p class="muted">Find something you'll love.</p>
+        </div>
+
+        <label class="sort-control">
+          Sort by
+          <select id="sortSelect">
+            <option value="featured">Featured</option>
+            <option value="low">Price: Low to High</option>
+            <option value="high">Price: High to Low</option>
+            <option value="name">Name: A to Z</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="category-list" id="categoryList">
+        <button class="category-chip active" data-category="All">All Products</button>
+        <button class="category-chip" data-category="Fashion">Fashion</button>
+        <button class="category-chip" data-category="Electronics">Electronics</button>
+        <button class="category-chip" data-category="Footwear">Footwear</button>
+        <button class="category-chip" data-category="Home">Home Essentials</button>
+      </div>
+
+      <div class="result-row">
+        <p id="resultCount">Loading products...</p>
+        <button class="text-button" id="clearFilters">Clear filters</button>
+      </div>
+
+      <div class="product-grid" id="productGrid"></div>
+
+      <div class="empty-state hidden" id="emptyProducts">
+        <span>🔎</span>
+        <h3>No products found</h3>
+        <p>Try another search or choose a different category.</p>
+        <button class="primary-button" id="resetProducts">View all products</button>
+      </div>
+    </section>
+
+    <section class="newsletter">
+      <div>
+        <p class="eyebrow">A LITTLE SOMETHING FOR YOUR INBOX</p>
+        <h2>Stay in the loop.</h2>
+        <p>Subscribe to our demo newsletter for the latest updates.</p>
+      </div>
+      <form id="newsletterForm" class="newsletter-form">
+        <input type="email" id="emailInput" placeholder="Enter your email" required>
+        <button class="primary-button" type="submit">Subscribe</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a href="#home" class="logo">Shop<span>Ease.</span></a>
+    <p>Everyday finds, made easy.</p>
+    <small>© <span id="year"></span> ShopEase. Student project demo.</small>
+  </footer>
+
+  <div class="overlay hidden" id="overlay"></div>
+
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart" aria-hidden="true">
+    <div class="cart-header">
+      <div>
+        <h2>Your Cart</h2>
+        <p class="muted" id="cartSubtitle">0 items</p>
+      </div>
+      <button class="close-button" id="closeCart" aria-label="Close cart">✕</button>
+    </div>
+
+    <div class="cart-items" id="cartItems"></div>
+
+    <div class="cart-empty" id="cartEmpty">
+      <span>🛒</span>
+      <h3>Your cart is empty</h3>
+      <p>Looks like you haven't added anything yet.</p>
+      <button class="primary-button" id="continueShopping">Start shopping</button>
+    </div>
+
+    <div class="cart-summary hidden" id="cartSummary">
+      <div class="summary-line">
+        <span>Subtotal</span><strong id="cartSubtotal">₹0</strong>
+      </div>
+      <div class="summary-line">
+        <span>Shipping</span><strong id="shippingCost">₹0</strong>
+      </div>
+      <div class="summary-line total-line">
+        <span>Total</span><strong id="cartTotal">₹0</strong>
+      </div>
+      <p class="shipping-note" id="shippingNote"></p>
+      <button class="primary-button checkout-button" id="checkoutButton">
+        Proceed to Checkout →
+      </button>
+      <p class="demo-note">Demo checkout only. No real payment is collected.</p>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <dialog class="checkout-dialog" id="checkoutDialog">
+    <button class="close-button dialog-close" id="closeCheckout" aria-label="Close">✕</button>
+    <div class="checkout-content" id="checkoutContent">
+      <span class="checkout-icon">📦</span>
+      <h2>Complete your demo order</h2>
+      <p class="muted">Enter your details to test the checkout flow.</p>
+
+      <form id="checkoutForm">
+        <label for="customerName">Full name</label>
+        <input id="customerName" name="customerName" required maxlength="80" placeholder="Your name">
+
+        <label for="customerEmail">Email address</label>
+        <input id="customerEmail" name="customerEmail" type="email" required maxlength="120" placeholder="you@example.com">
+
+        <label for="customerAddress">Delivery address</label>
+        <textarea id="customerAddress" name="customerAddress" required maxlength="300" rows="3" placeholder="Enter delivery address"></textarea>
+
+        <div class="checkout-total">
+          Order total <strong id="checkoutTotal">₹0</strong>
+        </div>
+        <button class="primary-button checkout-button" type="submit">Place Demo Order</button>
+      </form>
+    </div>
+  </dialog>
+</body>
+</html>
